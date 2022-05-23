@@ -1,28 +1,35 @@
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+function getElementValue(id) {
+  var element = document.getElementById(id);
+  return element.value;
+}
 
-var myInit = {
-  method: "GET",
-  headers: myHeaders,
-  method: "POST",
-  body: '{"expr": "20 * (((1 + 0.00517) ^ 24 - 1) / 0.00517)"}',
-};
+function saveForm() {
+  var nome = getElementValue("nome");
+  console.log(nome);
+  var mensalidade = getElementValue("mensalidade");
+  console.log(mensalidade);
+  var tempo = getElementValue("tempo");
+  console.log(tempo);
+}
 
-var url = "http://api.mathjs.org/v4/";
-const myRequest = new Request(url, myInit);
+function saveLocalStorage() {
+  var nome = getElementValue("nome");
+  localStorage.setItem("nome", nome);
+  var mensalidade = getElementValue("mensalidade");
+  localStorage.setItem("mensalidade", mensalidade);
+  var tempo = getElementValue("tempo");
+  localStorage.setItem("tempo", tempo);
+}
 
-fetch(myRequest)
-  .then((response) => {
-    if (response.status === 200) {
-      return response.json();
-    } else {
-      throw new Error("Ops! Houve um erro em nosso servidor.");
-    }
-  })
-  .then((response) => {
-    console.debug(response);
-    // ...
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+function redirectNewPage() {
+  window.location.href = "resultado.html";
+}
+function submit() {
+  saveLocalStorage();
+  redirectNewPage();
+  // Retorno "false" para parar a ação padrão do evento, ou seja, o clique no botão. Por algum motivo sem o "false" ele não redireciona para a outra página.
+  return false;
+}
+
+var element = document.getElementById("submit");
+element.onclick = submit;
