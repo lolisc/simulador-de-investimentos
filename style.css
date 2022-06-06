@@ -64,15 +64,8 @@ body {
   visibility: hidden;
 }
 
-.form-control small {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  visibility: hidden;
-}
-
 .form button {
-  background: white;
+  background: rgb(214, 214, 214);
   border: 2px solid #554655;
   color: rgb(0, 0, 0);
   font-size: 18px;
